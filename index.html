@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام Tawla Art السحابي المتكامل لإدارة وتسعير الأثاث - V7</title>
+    <title>نظام Tawla Art السحابي لإدارة وتسعير الأثاث - V8 الهاتف</title>
     <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Tawla%20Art%22,%22short_name%22:%22Tawla%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%2306274b%22,%22theme_color%22:%22%2306274b%22,%22icons%22:[{%22src%22:%22https://cdn-icons-png.flaticon.com/512/2874/2874802.png%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}">
     <style>
         :root {
@@ -23,12 +23,18 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-slate); color: var(--text-dark); padding: 20px; }
-        .app-container { max-width: 1700px; margin: 0 auto; display: flex; gap: 25px; }
+        body { background-color: var(--bg-slate); color: var(--text-dark); padding: 15px; }
+        
+        .app-container {
+            max-width: 1650px;
+            margin: 0 auto;
+            display: flex;
+            gap: 25px;
+        }
+
         .column-left-doc { flex: 1.1; min-width: 600px; }
         .column-right-cockpit { flex: 1.2; min-width: 650px; }
         
-        /* Left Side printable Contract Styles */
         .doc-blueprint { background-color: #ffffff; border: 1px solid #cbd5e1; box-shadow: 0 4px 20px rgba(0,0,0,0.06); padding: 0; position: sticky; top: 20px; border-radius: 4px; }
         .doc-header-banner { background-color: var(--primary-navy); color: white; padding: 25px; }
         .doc-logo-title { font-size: 28px; font-weight: 800; letter-spacing: 1px; border-bottom: 2px solid var(--accent-orange); padding-bottom: 5px; display: inline-block; }
@@ -47,7 +53,6 @@
         .blueprint-preview-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .signature-display-box { border: 1px dashed #cbd5e1; height: 80px; display: flex; align-items: center; justify-content: center; color: #94a3b8; }
 
-        /* Tabs Cockpit */
         .phase-tabs { display: flex; gap: 6px; margin-bottom: 20px; }
         .phase-btn { flex: 1; padding: 12px 4px; font-size: 12px; font-weight: 700; border: 1px solid var(--card-border); background-color: #e2e8f0; color: #475569; cursor: pointer; border-radius: 8px; transition: all 0.2s; text-align: center; }
         .phase-btn.active { background-color: var(--primary-navy); color: white; border-color: var(--primary-navy); }
@@ -55,19 +60,17 @@
         .panel-card { background-color: #ffffff; border-radius: 10px; padding: 22px; margin-bottom: 20px; border: 1px solid var(--card-border); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
         .panel-card-title { font-size: 16px; font-weight: 700; color: var(--primary-navy); margin-bottom: 18px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
 
-        /* Notification Center Banner */
         .system-notification-center { background-color: #fff; border-radius: 10px; border-right: 5px solid var(--accent-orange); padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .notif-title { font-size: 13.5px; font-weight: 700; color: var(--primary-navy); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
         .notif-item { font-size: 12.5px; padding: 6px 10px; border-radius: 4px; margin-bottom: 5px; font-weight: 600; }
         .notif-critical { background-color: var(--danger-bg); color: var(--danger-red); }
         .notif-warn { background-color: var(--warning-bg); color: var(--warning-amber); }
 
-        /* Form setups */
         .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
         .form-group { flex: 1; }
         label { display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 6px; }
-        input[type="text"], input[type="number"], input[type="date"], select { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; color: var(--text-dark); }
-        input:focus, select:focus { border-color: var(--accent-orange); }
+        input[type="text"], input[type="number"], input[type="date"], select { width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; outline: none; color: var(--text-dark); }
+        input:focus, select:focus { border-color: var(--accent-orange); box-shadow: 0 0 0 3px rgba(255, 126, 0, 0.1); }
 
         .premium-bar-item { background-color: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 18px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
         .premium-bar-name { font-weight: 700; font-size: 13.5px; flex: 2; }
@@ -75,7 +78,6 @@
         .premium-bar-qty-box input { width: 80px; text-align: center; padding: 5px; font-weight: bold; }
         .premium-bar-rate { flex: 1; text-align: left; font-size: 12px; font-weight: 700; color: var(--text-muted); }
 
-        /* CRM Pipeline Table */
         .crm-pipeline-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
         .crm-pipeline-table th, .crm-pipeline-table td { border: 1px solid var(--card-border); padding: 10px; text-align: right; }
         .crm-pipeline-table th { background-color: #f8fafc; font-weight: bold; color: var(--primary-navy); }
@@ -84,13 +86,13 @@
         .data-table th, .data-table td { border: 1px solid var(--card-border); padding: 8px; text-align: right; }
         .data-table th { background-color: #f8fafc; font-weight: bold; }
 
-        .signature-area { border: 2px dashed #cbd5e1; border-radius: 6px; background: #fff; cursor: crosshair; margin-bottom: 10px; }
+        .signature-area { border: 2px dashed #cbd5e1; border-radius: 6px; background: #fff; cursor: crosshair; margin-bottom: 10px; width: 100%; }
         
-        .btn { padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; border: none; transition: all 0.2s; display: inline-block; text-align: center; }
+        .btn { padding: 11px 18px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; border: none; transition: all 0.2s; display: inline-block; text-align: center; }
         .btn-success { background-color: var(--success-green); color: white; }
         .btn-danger { background-color: var(--danger-red); color: white; }
         .btn-primary { background-color: var(--primary-navy); color: white; }
-        .btn-orange { background-color: var(--accent-orange); color: white; }
+        .btn-orange { background-color: var(--accent-orange); color: white; width: 100%; margin-bottom: 10px; }
         .btn-orange:hover { background-color: #e07200; }
 
         .live-invoice-box { background-color: #f8fafc; border: 1px solid var(--card-border); border-radius: 8px; padding: 15px; margin-top: 15px; }
@@ -99,19 +101,89 @@
         .final-price-banner { background-color: var(--success-bg); border: 1px solid #a7f3d0; padding: 15px; border-radius: 6px; text-align: center; margin-top: 15px; color: var(--success-color); }
         .badge-info { background-color: #f1f5f9; color: var(--text-muted); padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-right: 5px; }
 
+        .mobile-view-tabs-navigation {
+            display: none;
+            width: 100%;
+            background: var(--primary-navy);
+            padding: 8px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(6, 39, 75, 0.15);
+        }
+        .mob-view-btn {
+            flex: 1;
+            padding: 12px 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
+            color: #e2e8f0;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13.5px;
+            transition: all 0.2s;
+        }
+        .mob-view-btn.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+        }
+
+        @media (max-width: 991px) {
+            body { padding: 10px; }
+            .mobile-view-tabs-navigation { display: flex; }
+            .app-container { flex-direction: column; gap: 0; }
+            
+            .column-left-doc {
+                display: none; 
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+            .column-right-cockpit {
+                display: block; 
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            input, select, .premium-bar-item { font-size: 16px !important; }
+            .form-row { flex-direction: column; gap: 12px; margin-bottom: 12px; }
+            .panel-card { padding: 16px; margin-bottom: 15px; }
+            
+            .premium-bar-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 12px;
+            }
+            .premium-bar-qty-box { width: 100%; text-align: right; }
+            .premium-bar-qty-box input { width: 100% !important; max-width: 100% !important; padding: 8px !important; }
+            .premium-bar-rate { width: 100%; text-align: left; padding-top: 2px; border-top: 1px dashed #f1f5f9; }
+            
+            .phase-btn { font-size: 11px; padding: 10px 2px; }
+            .crm-pipeline-table th, .crm-pipeline-table td { padding: 6px; font-size: 11px; }
+            
+            .doc-blueprint { box-shadow: none; border: 1px solid #e2e8f0; }
+            .doc-body-padding { padding: 16px; }
+            .doc-header-contact { text-align: right; margin-top: 15px; }
+        }
+
         @media print {
             body { background: white; padding: 0; }
-            .column-right-cockpit, .phase-tabs, .system-notification-center, .btn-orange { display: none !important; }
-            .column-left-doc { width: 100% !important; flex: none !important; }
+            .column-right-cockpit, .phase-tabs, .system-notification-center, .btn-orange, .mobile-view-tabs-navigation { display: none !important; }
+            .column-left-doc { width: 100% !important; flex: none !important; display: block !important; }
             .doc-blueprint { box-shadow: none !important; border: none !important; position: relative !important; top: 0 !important; }
         }
     </style>
 </head>
 <body>
 
+<div class="mobile-view-tabs-navigation" id="phone-view-tabs">
+    <button class="mob-view-btn active" id="m-btn-cockpit" onclick="toggleMobileColumnView('cockpit')">🎛️ لوحة التحكم والمدخلات</button>
+    <button class="mob-view-btn" id="m-btn-doc" onclick="toggleMobileColumnView('doc')">📄 وثيقة العقد المطبوع</button>
+</div>
+
 <div class="app-container">
 
-    <!-- LEFT COLUMN: PRINTABLE CONTRACT DOCUMENT & FINANCIAL SHEET -->
     <div class="column-left-doc">
         <div class="doc-blueprint" id="printable-area">
             <div class="doc-header-banner">
@@ -154,7 +226,6 @@
                     <span>المخططات والـ 3D المعتمدة ستظهر هنا لايف فور اختيارها...</span>
                 </div>
 
-                <!-- NEW: Printable Deposit / Financial Settlement Breakdown Panel inside the official contract -->
                 <div style="margin-bottom: 20px; border: 1px solid var(--card-border); border-radius: 6px; padding: 12px; background-color: #fafbfd;">
                     <div style="font-size: 13px; font-weight: 700; color: var(--primary-navy); margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">💰 كشف التسوية المالية والدفعات المعتمدة:</div>
                     <table style="width: 100%; font-size: 12.5px; border-collapse: collapse;">
@@ -212,7 +283,6 @@
         </div>
     </div>
 
-    <!-- RIGHT COLUMN: COCKPIT PANELS -->
     <div class="column-right-cockpit">
         
         <div class="system-notification-center">
@@ -223,24 +293,21 @@
         </div>
 
         <div class="phase-tabs">
-            <button class="phase-btn active" id="btn-tab-1" onclick="switchPhase(1)">📋 1: المقاس والشكل</button>
-            <button class="phase-btn" id="btn-tab-2" onclick="switchPhase(2)">💰 2: الأسعار والعقد</button>
-            <button class="phase-btn" id="btn-tab-3" style="background:#eff6ff; color:#1e40af;" onclick="switchPhase(3)">🗄️ 3: خط الإنتاج والمتابعة (CRM)</button>
-            <button class="phase-btn" id="btn-tab-4" style="background:#fff7ed; color:#c2410c;" onclick="switchPhase(4)">⚙️ 4: أسعار الخامات العامة</button>
+            <button class="phase-btn active" id="btn-tab-1" onclick="switchPhase(1)">📋 1: مقاس وشكل</button>
+            <button class="phase-btn" id="btn-tab-2" onclick="switchPhase(2)">💰 2: أسعار وعقد</button>
+            <button class="phase-btn" id="btn-tab-3" style="background:#eff6ff; color:#1e40af;" onclick="switchPhase(3)">🗄️ 3: المتابعة (CRM)</button>
+            <button class="phase-btn" id="btn-tab-4" style="background:#fff7ed; color:#c2410c;" onclick="switchPhase(4)">⚙️ 4: الخامات</button>
         </div>
 
-        <div style="margin-bottom: 20px; display:flex; justify-content: space-between; align-items:center;">
-            <button class="btn btn-orange" onclick="createNewFreshQuotationForm()">➕ فتح نموذج عرض سعر جديد (سيريال تلقائي)</button>
-            <span style="font-size:12px; font-weight:bold; color:var(--text-muted);" id="lbl-current-counter-status"></span>
-        </div>
+        <button class="btn btn-orange" onclick="createNewFreshQuotationForm()">➕ فتح نموذج عرض سعر جديد (سيريال تلقائي)</button>
+        <div style="font-size:12px; font-weight:bold; color:var(--text-muted); text-align:center; margin-bottom:15px;" id="lbl-current-counter-status"></div>
 
-        <!-- PHASE 1: CLIENT DETAILS & DYNAMIC DOWN PAYMENT INPUTS -->
         <div id="phase-1-content" class="tab-content active">
             <div class="panel-card">
                 <div class="panel-card-title">بيانات العميل والمقاسات الأساسية للطلب</div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="val-serial">رقم السيريال (توليد تلقائي)</label>
+                        <label for="val-serial">رقم السيريال</label>
                         <input type="text" id="val-serial" value="TW-ART-2026-098" oninput="syncTextInputs()">
                     </div>
                     <div class="form-group">
@@ -259,29 +326,29 @@
                     </div>
                 </div>
 
-                <!-- NEW: Integrated Deposit, Payment Method and Next Due Date Inputs -->
-                <div class="form-row" style="background: #fafafa; padding: 12px; border-radius:6px; border:1px solid #ebd7aa;">
-                    <div class="form-group">
-                        <label for="val-deposit-paid" style="color: var(--success-green);">💸 العربون المدفوع (درهم)</label>
-                        <input type="number" id="val-deposit-paid" value="500" min="0" oninput="triggerPricingCalculation()">
+                <div style="background: #fafafa; padding: 12px; border-radius:6px; border:1px solid #ebd7aa; margin-bottom:15px;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="val-deposit-paid" style="color: var(--success-green);">💸 العربون المدفوع (درهم)</label>
+                            <input type="number" id="val-deposit-paid" value="500" min="0" oninput="triggerPricingCalculation()">
+                        </div>
+                        <div class="form-group">
+                            <label for="val-payment-method">طريقة دفع العربون</label>
+                            <select id="val-payment-method" onchange="triggerPricingCalculation()">
+                                <option value="كاش">💵 كاش (Cash)</option>
+                                <option value="فيزا / بطاقة">💳 فيزا / بطاقة بنكية (Visa/Card)</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="val-payment-method">طريقة دفع العربون</label>
-                        <select id="val-payment-method" onchange="triggerPricingCalculation()">
-                            <option value="كاش">💵 كاش (Cash)</option>
-                            <option value="فيزا / بطاقة">💳 فيزا / بطاقة بنكية (Visa/Card)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="val-next-pay-date">تاريخ الدفعة الثانية 📅</label>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label for="val-next-pay-date">تاريخ الدفعة الثانية المتبقية 📅</label>
                         <input type="date" id="val-next-pay-date" value="2026-08-02" onchange="triggerPricingCalculation()">
                     </div>
                 </div>
 
-                <div class="form-row" style="margin-top: 15px;">
+                <div class="form-row">
                     <div class="form-group">
                         <label for="val-loc">وجهة الشحن وتوصيل الطاولة (إمارة)</label>
-                        <!-- Updated dynamic select linking all UAE emirates directly to pricing model -->
                         <select id="val-loc" onchange="handleEmirateShippingChange()">
                             <option value="عجمان">عجمان (70 درهم)</option>
                             <option value="الشارقة">الشارقة (100 درهم)</option>
@@ -293,7 +360,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="val-deadline">موعد التسليم المتفق عليه الكلي</label>
+                        <label for="val-deadline">موعد التسليم المتفق عليه</label>
                         <input type="date" id="val-deadline" value="2026-08-02" onchange="triggerPricingCalculation()">
                     </div>
                 </div>
@@ -315,39 +382,38 @@
             </div>
 
             <div class="panel-card">
-                <div class="panel-card-title">🗄️ التقسيم والتركيب الهيكلي الستاندرد للمنتج</div>
+                <div class="panel-card-title">🗄️ التقسيم والتركيب الهيكلي الستاندرد</div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="val-drawers">عدد الأدراج المطلوبة</label>
+                        <label for="val-drawers">عدد الأدراج</label>
                         <input type="number" id="val-drawers" value="3" min="0" oninput="autoSyncHardwareFromStructure()">
                     </div>
                     <div class="form-group">
-                        <label for="val-doors">عدد الضلف والأبواب</label>
+                        <label for="val-doors">عدد الضلف</label>
                         <input type="number" id="val-doors" value="1" min="0" oninput="autoSyncHardwareFromStructure()">
                     </div>
                     <div class="form-group">
-                        <label for="val-shelves">الرفوف الداخلية المضافة</label>
+                        <label for="val-shelves">الرفوف الداخلية</label>
                         <input type="number" id="val-shelves" value="1" min="0" oninput="triggerPricingCalculation()">
                     </div>
                 </div>
             </div>
 
             <div class="panel-card">
-                <div class="panel-card-title">🖼️ ارفع صور ومخططات الطاولة</div>
+                <div class="panel-card-title">🖼️ المخططات والرسومات</div>
                 <input type="file" id="file-blueprint-upload" accept="image/*" onchange="loadBlueprintImageToDoc(this)">
             </div>
 
             <div class="panel-card">
                 <div class="panel-card-title">🖋️ توقيع واعتماد الزبون الرقمي</div>
-                <canvas id="sig-pad" class="signature-area" width="550" height="120"></canvas>
+                <canvas id="sig-pad" class="signature-area" height="130"></canvas>
                 <button class="btn btn-danger" style="padding:6px 12px; font-size:11px;" onclick="clearSignatureCanvas()">مسح التوقيع</button>
             </div>
         </div>
 
-        <!-- PHASE 2: DETAILED ANALYSIS & PRICING FACTORY INVOICE -->
         <div id="phase-2-content" class="tab-content">
             <div class="panel-card">
-                <div class="panel-card-title">🪵 خامات التصنيع والتغطية المختارة</div>
+                <div class="panel-card-title">🪵 خامات التصنيع المحددة</div>
                 <div class="form-group" style="margin-bottom:12px;">
                     <label for="sel-body-wood">خامة الهيكل والعلبة الداخلية</label>
                     <select id="sel-body-wood" onchange="triggerPricingCalculation()"></select>
@@ -370,7 +436,7 @@
             <div class="panel-card" style="border: 2px solid var(--primary-navy);">
                 <div class="panel-card-title" style="color:var(--accent-orange)">📊 كشف وعقد الفاتورة التحليلية للإنتاج</div>
                 <div class="live-invoice-box">
-                    <div class="invoice-line"><span>المساحة السطحية التقديرية لجسم الخشب:</span><strong id="inv-lbl-m2">0.00 م2</strong></div>
+                    <div class="invoice-line"><span>المساحة السطحية لجسم الخشب:</span><strong id="inv-lbl-m2">0.00 م2</strong></div>
                     <div class="invoice-line"><span>تكلفة الخشب والألواح الداخلية:</span><strong id="inv-lbl-cost-wood">0 درهم</strong></div>
                     <div class="invoice-line"><span>تكلفة خامة السطح (كورين/بورسلان):</span><strong id="inv-lbl-cost-top">0 درهم</strong></div>
                     <div class="invoice-line"><span>تكلفة أعمال دهان الرش والتشطيب:</span><strong id="inv-lbl-cost-paint">0 درهم</strong></div>
@@ -380,7 +446,7 @@
                     
                     <div class="form-row" style="margin-top:12px; border-top:1px solid #e2e8f0; padding-top:10px;">
                         <div class="form-group">
-                            <label>مصاريف الورشة التشغيلية %</label>
+                            <label>مصاريف الورشة %</label>
                             <input type="number" id="inp-percent-overhead" value="10" oninput="triggerPricingCalculation()">
                         </div>
                         <div class="form-group">
@@ -401,17 +467,16 @@
                     <div style="font-size:13px; font-weight:bold; margin-bottom:4px;">سعر البيع النهائي المقترح للعميل</div>
                     <div style="font-size:28px; font-weight:800;" id="inv-lbl-final-price">0 درهم</div>
                 </div>
-                <div style="display:flex; gap:10px; margin-top:15px;">
-                    <button class="btn btn-success" style="flex:1;" onclick="saveQuotationToPipelineCRM()">💾 حفظ واعتماد الطلب في خط الإنتاج</button>
-                    <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة عرض السعر PDF</button>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+                    <button class="btn btn-success" onclick="saveQuotationToPipelineCRM()">💾 حفظ واعتماد الطلب في الـ CRM</button>
+                    <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة عرض السعر المباشر PDF</button>
                 </div>
             </div>
         </div>
 
-        <!-- PHASE 3: CRM PIPELINE WITH ADVANCED BALANCE CALCULATION AND STATUS PICKERS -->
         <div id="phase-3-content" class="tab-content">
             <div class="panel-card">
-                <div class="panel-card-title">📋 خط الإنتاج ومتابعة عقود العملاء ومواعيد التسليم</div>
+                <div class="panel-card-title">📋 خط الإنتاج ومتابعة عقود العملاء والدفعات</div>
                 <div style="overflow-x:auto;">
                     <table class="crm-pipeline-table" id="crm-pipeline-render-target">
                         <thead>
@@ -423,9 +488,9 @@
                                 <th>المتبقي</th>
                                 <th>تاريخ المتبقي</th>
                                 <th>موعد التسليم</th>
-                                <th>الأيام المتبقية</th>
-                                <th>الحالة والاعتماد</th>
-                                <th>إجراءات</th>
+                                <th>المتبقي</th>
+                                <th>الحالة</th>
+                                <th>حذف</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -434,7 +499,6 @@
             </div>
         </div>
 
-        <!-- PHASE 4: GENERAL PRICE LIST DATABASE -->
         <div id="phase-4-content" class="tab-content">
             <div class="panel-card">
                 <div class="panel-card-title">🪵 إدارة أصناف وأسعار الخامات الأساسية</div>
@@ -442,8 +506,8 @@
                     <div style="font-size:12px; font-weight:bold; color:var(--primary-navy); margin-bottom:6px;">➕ إضافة خامة أساسية جديدة للقائمة:</div>
                     <div class="form-row">
                         <input type="text" id="new-mat-name" placeholder="اسم الخامة الجديدة">
-                        <input type="number" id="new-mat-price" placeholder="السعر (درهم)" style="width:110px;">
-                        <button class="btn btn-success" style="padding:10px;" onclick="crudAddMaterial()">إضافة</button>
+                        <input type="number" id="new-mat-price" placeholder="السعر (درهم)">
+                        <button class="btn btn-success" onclick="crudAddMaterial()">إضافة</button>
                     </div>
                 </div>
                 <table class="data-table" id="crud-materials-table">
@@ -458,9 +522,9 @@
                     <div style="font-size:12px; font-weight:bold; color:var(--primary-navy); margin-bottom:6px;">➕ إضافة قطعة إكسسوار أو إضافة جديدة:</div>
                     <div class="form-row">
                         <input type="text" id="new-hw-name" placeholder="اسم الإكسسوار/الإضافة">
-                        <input type="number" id="new-hw-price" placeholder="السعر" style="width:100px;">
-                        <input type="text" id="new-hw-unit" value="حبة" style="width:80px;" placeholder="الوحدة">
-                        <button class="btn btn-success" style="padding:10px;" onclick="crudAddHardware()">إضافة</button>
+                        <input type="number" id="new-hw-price" placeholder="السعر">
+                        <input type="text" id="new-hw-unit" value="حبة" placeholder="الوحدة">
+                        <button class="btn btn-success" onclick="crudAddHardware()">إضافة</button>
                     </div>
                 </div>
                 <table class="data-table" id="crud-hardware-table">
@@ -495,22 +559,13 @@
         { id: 8, name: "حنفية خلاط مياه", price: 130, unit: "حبة" }
     ];
 
-    // Explicit UAE Emirates fixed rates matching user configurations
     const uaeShippingRates = {
-        "عجمان": 70,
-        "الشارقة": 100,
-        "دبي": 200,
-        "أم القيوين": 120,
-        "رأس الخيمة": 250,
-        "الفجيرة": 300,
-        "أبوظبي": 400
+        "عجمان": 70, "الشارقة": 100, "دبي": 200, "أم القيوين": 120, "رأس الخيمة": 250, "الفجيرة": 300, "أبوظبي": 400
     };
-
-    const defaultLogistics = { cnc: 120, labor: 350, shipping: 200 };
 
     let dbMaterials = JSON.parse(localStorage.getItem('t5_materials')) || defaultMaterials;
     let dbHardware = JSON.parse(localStorage.getItem('t5_hardware')) || defaultHardware;
-    let dbLogistics = JSON.parse(localStorage.getItem('t5_logistics')) || defaultLogistics;
+    let dbLogistics = JSON.parse(localStorage.getItem('t5_logistics')) || { cnc: 120, labor: 350, shipping: 200 };
     let crmPipeline = JSON.parse(localStorage.getItem('t5_crm_pipeline')) || [];
     let serialCounter = parseInt(localStorage.getItem('t6_serial_index')) || 98;
 
@@ -524,15 +579,36 @@
         localStorage.setItem('t6_serial_index', serialCounter);
     }
 
+    function toggleMobileColumnView(viewTarget) {
+        if(window.innerWidth > 991) return;
+        
+        const leftDoc = document.querySelector('.column-left-doc');
+        const rightCockpit = document.querySelector('.column-right-cockpit');
+        const btnCockpit = document.getElementById('m-btn-cockpit');
+        const btnDoc = document.getElementById('m-btn-doc');
+
+        if(viewTarget === 'cockpit') {
+            rightCockpit.style.display = 'block';
+            leftDoc.style.display = 'none';
+            btnCockpit.classList.add('active');
+            btnDoc.classList.remove('active');
+        } else {
+            rightCockpit.style.display = 'none';
+            leftDoc.style.display = 'block';
+            btnCockpit.classList.remove('active');
+            btnDoc.classList.add('active');
+            triggerPricingCalculation();
+        }
+    }
+
     function applyCurrentSerialSequence() {
         const year = new Date().getFullYear();
         const formattedSerial = `TW-ART-${year}-${String(serialCounter).padStart(3, '0')}`;
         document.getElementById('val-serial').value = formattedSerial;
-        document.getElementById('lbl-current-counter-status').innerText = `السيريال النشط: ${formattedSerial}`;
+        document.getElementById('lbl-current-counter-status').innerText = `السيريال المتاح حالياً: ${formattedSerial}`;
         syncTextInputs();
     }
 
-    // Dynamic shipping fee hook trigger
     function handleEmirateShippingChange() {
         const selectedEmirate = document.getElementById('val-loc').value;
         dbLogistics.shipping = uaeShippingRates[selectedEmirate] || 200;
@@ -548,10 +624,8 @@
         document.getElementById('val-phone').value = "+971 55 ";
         document.getElementById('val-loc').value = "دبي";
         dbLogistics.shipping = 200;
-        
         document.getElementById('val-deposit-paid').value = "500";
         document.getElementById('val-payment-method').value = "كاش";
-
         document.getElementById('val-width').value = "80";
         document.getElementById('val-depth').value = "50";
         document.getElementById('val-height').value = "90";
@@ -565,6 +639,7 @@
         syncTextInputs();
         triggerPricingCalculation();
         switchPhase(1);
+        toggleMobileColumnView('cockpit');
     }
 
     function switchPhase(phaseNum) {
@@ -670,17 +745,13 @@
         const totalProductionWithShipping = cumulativeBaseCost + calculatedOverheads + dbLogistics.shipping;
         const profitRate = (parseFloat(document.getElementById('inp-percent-profit').value) || 0) / 100;
         const dynamicProfitValue = totalProductionWithShipping * profitRate;
-        
-        // Final Suggested Sale Price to Customer
         const finalPrice = Math.round(totalProductionWithShipping + dynamicProfitValue);
 
-        // Extract Advanced Down Payment Specs
         const depositPaid = Math.round(parseFloat(document.getElementById('val-deposit-paid').value) || 0);
         const paymentMethod = document.getElementById('val-payment-method').value;
         const nextPayDate = document.getElementById('val-next-pay-date').value;
         const remainingBalance = Math.max(0, finalPrice - depositPaid);
 
-        // Update real time invoice panels fields
         document.getElementById('inv-lbl-cost-wood').innerText = Math.round(costWood).toLocaleString() + " درهم";
         document.getElementById('inv-lbl-cost-top').innerText = Math.round(costTop).toLocaleString() + " درهم";
         document.getElementById('inv-lbl-cost-paint').innerText = Math.round(costPaint).toLocaleString() + " درهم";
@@ -691,7 +762,6 @@
         document.getElementById('inv-lbl-net-profit').innerText = Math.round(dynamicProfitValue).toLocaleString() + " درهم";
         document.getElementById('inv-lbl-final-price').innerText = finalPrice.toLocaleString() + " درهم";
 
-        // Update Printable Document Breakdown Live Elements
         document.getElementById('doc-fin-total').innerText = finalPrice.toLocaleString() + " درهم";
         document.getElementById('doc-fin-deposit').innerText = depositPaid.toLocaleString() + " درهم";
         document.getElementById('doc-fin-method').innerText = paymentMethod;
@@ -706,53 +776,41 @@
         const name = document.getElementById('val-name').value;
         const price = document.getElementById('inv-lbl-final-price').innerText;
         const deadline = document.getElementById('val-deadline').value;
-        
         const deposit = document.getElementById('val-deposit-paid').value;
         const balance = document.getElementById('doc-fin-balance').innerText;
         const nextDate = document.getElementById('val-next-pay-date').value;
 
         crmPipeline = crmPipeline.filter(item => item.serial !== serial);
-        crmPipeline.push({
-            serial, name, price, deadline, deposit, balance, nextDate, status: "approved"
-        });
+        crmPipeline.push({ serial, name, price, deadline, deposit, balance, nextDate, status: "approved" });
         saveGlobalState();
         calculateSystemDeadlinesAndAlerts();
-        alert('تم اعتماد العرض وحفظ الدفعات واللوجستيات بنجاح داخل خط الإنتاج!');
+        alert('تم اعتماد وحفظ الدفعات بنجاح داخل الـ CRM!');
     }
 
     function renderCRMPipelineZone() {
         const tbody = document.querySelector('#crm-pipeline-render-target tbody');
         if(crmPipeline.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--text-muted);">لا توجد مشروعات نشطة حالياً.</td></tr>`;
-            return;
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--text-muted);">لا توجد مشروعات نشطة.</td></tr>`; return;
         }
         const today = new Date();
         tbody.innerHTML = crmPipeline.map(item => {
-            const destDate = new Date(item.deadline);
-            const timeDiff = destDate - today;
+            const destDate = new Date(item.deadline); const timeDiff = destDate - today;
             const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
             let remainingText = daysLeft + " يوم"; let rowStyle = "";
-            if(daysLeft < 0) { remainingText = "متأخر بـ " + Math.abs(daysLeft) + " يوم"; rowStyle = "background-color:var(--danger-bg); font-weight:bold;"; }
-            else if(daysLeft <= 2) { remainingText = "⏳ عاجل (" + daysLeft + " يوم)"; rowStyle = "background-color:var(--warning-bg);"; }
+            if(daysLeft < 0) { remainingText = "متأخر " + Math.abs(daysLeft) + " يوم"; rowStyle = "background-color:var(--danger-bg); font-weight:bold;"; }
+            else if(daysLeft <= 2) { remainingText = "⏳ عاجل (" + daysLeft + ")"; rowStyle = "background-color:var(--warning-bg);"; }
 
             return `
                 <tr style="${rowStyle}">
-                    <td><strong>${item.serial}</strong></td>
-                    <td>${item.name}</td>
-                    <td style="font-weight:bold;">${item.price}</td>
-                    <td style="color:var(--success-green); font-weight:bold;">${item.deposit} درهم</td>
-                    <td style="color:var(--danger-red); font-weight:bold;">${item.balance}</td>
-                    <td style="color:#c2410c; font-weight:bold;">${item.nextDate || 'N/A'}</td>
-                    <td>${item.deadline}</td>
-                    <td>${remainingText}</td>
+                    <td><strong>${item.serial}</strong></td><td>${item.name}</td><td>${item.price}</td><td>${item.deposit} د.إ</td><td>${item.balance}</td><td>${item.nextDate}</td><td>${item.deadline}</td><td>${remainingText}</td>
                     <td>
-                        <select onchange="updateProjectStatus('${item.serial}', this.value)" style="padding:4px; font-size:11px; font-weight:bold;">
+                        <select onchange="updateProjectStatus('${item.serial}', this.value)" style="padding:2px; font-size:11px;">
                             <option value="pending" ${item.status === 'pending'?'selected':''}>⏳ قيد الانتظار</option>
-                            <option value="approved" ${item.status === 'approved'?'selected':''}>🛠️ تم الاعتماد والبدء</option>
-                            <option value="completed" ${item.status === 'completed'?'selected':''}>✅ تم التسليم والحمد لله</option>
+                            <option value="approved" ${item.status === 'approved'?'selected':''}>🛠️ تفصيل بالورشة</option>
+                            <option value="completed" ${item.status === 'completed'?'selected':''}>✅ تم التسليم</option>
                         </select>
                     </td>
-                    <td><button class="btn btn-danger" style="padding:3px 8px; font-size:11px;" onclick="deleteProjectFromCRM('${item.serial}')">حذف</button></td>
+                    <td><button class="btn btn-danger" style="padding:2px 6px; font-size:10px;" onclick="deleteProjectFromCRM('${item.serial}')">✕</button></td>
                 </tr>
             `;
         }).join('');
@@ -764,26 +822,26 @@
     }
 
     function deleteProjectFromCRM(serial) {
-        if(confirm('هل تريد حذف هذا المشروع؟')){ crmPipeline = crmPipeline.filter(p => p.serial !== serial); saveGlobalState(); calculateSystemDeadlinesAndAlerts(); renderCRMPipelineZone(); }
+        if(confirm('هل تريد الحذف؟')){ crmPipeline = crmPipeline.filter(p => p.serial !== serial); saveGlobalState(); calculateSystemDeadlinesAndAlerts(); renderCRMPipelineZone(); }
     }
 
     function calculateSystemDeadlinesAndAlerts() {
-        const zone = document.getElementById('notif-render-zone');
-        const activeItems = crmPipeline.filter(p => p.status !== 'completed');
+        const zone = document.getElementById('notif-render-zone'); const activeItems = crmPipeline.filter(p => p.status !== 'completed');
         if(activeItems.length === 0) { zone.innerHTML = `<div class="notif-item" style="background:#f1f5f9; color:var(--text-muted);">لا توجد مواعيد تسليم نشطة حالياً.</div>`; return; }
         const today = new Date(); let htmlAlerts = "";
         activeItems.forEach(item => {
             const dest = new Date(item.deadline); const diff = Math.ceil((dest - today) / (1000 * 60 * 60 * 24));
-            if(diff < 0) { htmlAlerts += `<div class="notif-item notif-critical">🚨 طاولة العميل (${item.name}) متأخرة بـ ${Math.abs(diff)} يوم! (سيريال: ${item.serial})</div>`; triggerAudioAlertFallback(); }
-            else if(diff <= 3) { htmlAlerts += `<div class="notif-item notif-warn">⏳ اقترب موعد تسليم طاولة (${item.name}) باقي ${diff} أيام! (تاريخ: ${item.deadline})</div>`; }
+            if(diff < 0) { htmlAlerts += `<div class="notif-item notif-critical">🚨 طاولة (${item.name}) متأخرة بـ ${Math.abs(diff)} يوم! (${item.serial})</div>`; triggerAudioAlertFallback(); }
+            else if(diff <= 3) { htmlAlerts += `<div class="notif-item notif-warn">⏳ اقترب موعد تسليم طاولة (${item.name}) باقي ${diff} أيام!</div>`; }
         });
-        zone.innerHTML = htmlAlerts || `<div class="notif-item" style="background:var(--success-bg); color:var(--success-color);">✅ جميع مواعيد تسليم الطاولات في الأمان وضمن الجدول الزمني.</div>`;
+        zone.innerHTML = htmlAlerts || `<div class="notif-item" style="background:var(--success-bg); color:var(--success-color);">✅ جميع المواعيد في الأمان وضمن الجدول.</div>`;
     }
 
     function triggerAudioAlertFallback() { try { const audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const oscillator = audioCtx.createOscillator(); oscillator.type = 'sine'; oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); oscillator.connect(audioCtx.destination); oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.15); } catch(e){} }
 
     function renderPhase4EditorTables() {
         document.querySelector('#crud-materials-table tbody').innerHTML = dbMaterials.map(m => `<tr><td><strong>${m.name}</strong></td><td><input type="number" value="${m.price}" onchange="crudUpdateMaterialPrice(${m.id}, this.value)" style="width:90px; padding:4px;"></td><td><button class="btn btn-danger" style="padding:3px 8px; font-size:11px;" onclick="crudDeleteMaterial(${m.id})">✕</button></td></tr>`).join('');
+        document.querySelector('#crud-hardware-table tbody').innerHTML = dbHardware.map(hw => `<tr><td><strong>${hw.name}</strong></td><td><input type="number" value="${hw.price}" onchange="crudUpdateHardwarePrice(${hw.id}, this.value)" style="width:80px; padding:4px;"></td><td>${hw.unit}</td><td><button class="btn btn-danger" style="padding:3px 8px; font-size:11px;" onclick="crudDeleteHardware(${hw.id})">✕</button></td></tr>`).join('');
     }
 
     function crudAddMaterial() { const name = document.getElementById('new-mat-name').value.trim(); const price = parseFloat(document.getElementById('new-mat-price').value) || 0; if(!name) return; dbMaterials.push({ id: Date.now(), name, price }); saveGlobalState(); populateDropdownMenus(); renderPhase4EditorTables(); triggerPricingCalculation(); document.getElementById('new-mat-name').value = ''; document.getElementById('new-mat-price').value = ''; }
@@ -794,7 +852,14 @@
     function crudDeleteHardware(id) { dbHardware = dbHardware.filter(hw => hw.id !== id); saveGlobalState(); loadHardwareRows(); renderPhase4EditorTables(); triggerPricingCalculation(); }
     function crudSaveLogistics() { saveGlobalState(); triggerPricingCalculation(); }
 
-    function initCanvasSignaturePad() { canvas = document.getElementById('sig-pad'); if(!canvas) return; ctx = canvas.getContext('2d'); ctx.strokeStyle = '#06274b'; ctx.lineWidth = 2; canvas.addEventListener('mousedown', startSigDrawing); canvas.addEventListener('mousemove', drawSigLine); canvas.addEventListener('mouseup', stopSigDrawing); canvas.addEventListener('touchstart', e => { const t = e.touches[0]; startSigDrawing(getTouchPos(t)); e.preventDefault(); }); canvas.addEventListener('touchmove', e => { const t = e.touches[0]; drawSigLine(getTouchPos(t)); e.preventDefault(); }); }
+    function initCanvasSignaturePad() {
+        canvas = document.getElementById('sig-pad'); if(!canvas) return; ctx = canvas.getContext('2d'); ctx.strokeStyle = '#06274b'; ctx.lineWidth = 2;
+        const parentWidth = canvas.parentElement.clientWidth;
+        canvas.width = parentWidth - 5; 
+        canvas.addEventListener('mousedown', startSigDrawing); canvas.addEventListener('mousemove', drawSigLine); canvas.addEventListener('mouseup', stopSigDrawing);
+        canvas.addEventListener('touchstart', e => { const t = e.touches[0]; startSigDrawing(getTouchPos(t)); e.preventDefault(); });
+        canvas.addEventListener('touchmove', e => { const t = e.touches[0]; drawSigLine(getTouchPos(t)); e.preventDefault(); });
+    }
     function getTouchPos(touch) { const rect = canvas.getBoundingClientRect(); return { clientX: touch.clientX - rect.left, clientY: touch.clientY - rect.top, isTouch: true }; }
     function startSigDrawing(e) { isDrawing = true; ctx.beginPath(); const x = e.isTouch ? e.clientX : e.clientX - canvas.getBoundingClientRect().left; const y = e.isTouch ? e.clientY : e.clientY - canvas.getBoundingClientRect().top; ctx.moveTo(x, y); }
     function drawSigLine(e) { if (!isDrawing) return; const x = e.isTouch ? e.clientX : e.clientX - canvas.getBoundingClientRect().left; const y = e.isTouch ? e.clientY : e.clientY - canvas.getBoundingClientRect().top; ctx.lineTo(x, y); ctx.stroke(); syncSignatureToDocumentBlueprint(); }
@@ -805,6 +870,7 @@
 
     window.onload = function() {
         populateDropdownMenus(); loadHardwareRows(); applyCurrentSerialSequence(); handleEmirateShippingChange(); initCanvasSignaturePad(); renderCRMPipelineZone(); calculateSystemDeadlinesAndAlerts();
+        if(window.innerWidth <= 991) { toggleMobileColumnView('cockpit'); }
     };
 </script>
 
